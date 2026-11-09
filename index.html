@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ePortfolio Julian Cutaya</title>
+<meta name="description" content="ePortfolio de Julian Cutaya, élève ingénieur à l'ENSEEIHT.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap">
+<style>
+/* Layout: sticky header (name, FR/EN, pill tabs); one panel visible at a time, max 960px column. Style borrowed from the Gymbo app: dark ground, flat cards, mint accent, Bricolage Grotesque. */
+:root{
+  --bg:#0f1318; --card:#1b2129; --raised:#262d36; --ink:#e9ecef; --soft:#c6cbd1; --muted:#9aa1ab;
+  --mint:#7dd6c0; --mint-ink:#10231e; --gold:#f0c46a; --orange:#f08a4b; --violet:#b08cf0; --blue:#5a9de0;
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1); --pop:cubic-bezier(.3,1.6,.5,1); --gutter:clamp(16px,4vw,28px);
+  color-scheme:dark;
+}
+:root:not([data-lang]) body [lang="en"],:root[data-lang="fr"] body [lang="en"],:root[data-lang="en"] body [lang="fr"]{display:none !important}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.02rem/1.55 var(--font);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:var(--mint)}
+img,video{max-width:100%;height:auto;display:block}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:8px}
+.wrap{max-width:960px;margin:0 auto;padding-inline:var(--gutter)}
+.muted{color:var(--muted)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:rgba(15,19,24,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bar{display:flex;align-items:center;gap:12px;min-height:60px}
+.brand{font-weight:800;font-size:1.1rem;margin-right:auto;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand i{width:30px;height:30px;border-radius:15px;background:var(--mint);color:var(--mint-ink);display:grid;place-items:center;font-style:normal;font-size:.8rem;font-weight:800}
+.lang{position:relative;display:grid;grid-template-columns:1fr 1fr;border-radius:22px;padding:4px;background:var(--card)}
+.lang::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:18px;background:var(--mint);transition:transform .45s var(--pop)}
+:root[data-lang="en"] .lang::before{transform:translateX(100%)}
+.lang button{position:relative;z-index:1;border:0;background:none;font:700 .85rem/1 var(--font);color:var(--muted);min-height:36px;min-width:46px;cursor:pointer;transition:color .3s}
+.lang button[aria-pressed="true"]{color:var(--mint-ink)}
+.tabs{position:relative;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:2px 0 12px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{position:relative;z-index:1;flex:none;border:0;background:none;min-height:40px;padding:0 15px;border-radius:20px;font:600 .93rem/1 var(--font);color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .25s}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink)}
+.tabs .ind{position:absolute;top:2px;height:40px;border-radius:20px;background:var(--raised);transition:left .45s var(--pop),width .45s var(--pop)}
+
+/* panels */
+main{padding-block:clamp(20px,4vw,40px) 64px;transition:opacity .2s ease,transform .2s ease}
+.tabs{transition:opacity .2s ease}
+body.switching main{opacity:0;transform:translateY(6px)}
+body.switching .tabs{opacity:0}
+.panel{display:flex;flex-direction:column;gap:14px}
+.panel>*{animation:rise .5s var(--ease) both}
+.panel>*:nth-child(2){animation-delay:.05s}.panel>*:nth-child(3){animation-delay:.1s}.panel>*:nth-child(4){animation-delay:.15s}.panel>*:nth-child(5){animation-delay:.2s}.panel>*:nth-child(6){animation-delay:.25s}.panel>*:nth-child(7){animation-delay:.3s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.ph{padding:6px 4px 6px}
+.ph h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800}
+.ph p{color:var(--soft);margin-top:6px;max-width:42em}
+.label{margin:18px 4px 0;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--card);border-radius:22px;padding:clamp(16px,3vw,22px);min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:720px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.kicker{font-size:.8rem;font-weight:600;color:var(--muted)}
+.card h3{font-size:1.15rem;font-weight:700;margin:4px 0 8px}
+.card p{color:var(--soft)}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:10px;font-size:.82rem;font-weight:700;background:rgba(125,214,192,.13);color:var(--mint)}
+.tag.gold{background:rgba(240,196,106,.15);color:var(--gold)}
+.tag.violet{background:rgba(176,140,240,.15);color:var(--violet)}
+.tag.orange{background:rgba(240,138,75,.15);color:var(--orange)}
+.tag.blue{background:rgba(90,157,224,.16);color:#8cbcf0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{height:34px;display:flex;align-items:center;padding:0 13px;border-radius:17px;background:var(--card);font-size:.9rem;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:23px;border:0;font:700 .95rem/1 var(--font);text-decoration:none;cursor:pointer;color:var(--ink);background:var(--raised);transition:transform .25s var(--pop),filter .2s}
+.btn:hover{filter:brightness(1.12)}
+.btn:active{transform:scale(.96)}
+.btn.solid{background:var(--mint);color:var(--mint-ink)}
+.btn svg{width:17px;height:17px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* welcome: profile, like the app */
+.profile{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:8px}
+.ring{width:150px;height:150px;border-radius:50%;border:2px solid rgba(125,214,192,.5);padding:7px}
+.avatar{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.profile h1{font-size:clamp(2rem,6vw,2.6rem);font-weight:800;margin-top:14px}
+.handle{font-weight:600;color:var(--mint);margin-top:2px}
+.bio{color:var(--soft);max-width:34em;margin-top:12px}
+.stats{display:flex;justify-content:center;margin-top:20px}
+.stats div{width:clamp(104px,24vw,140px);text-align:center;padding-inline:6px}
+.stats div+div{border-left:1px solid var(--raised)}
+.stats b{display:block;font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stats span{display:block;font-size:.8rem;line-height:1.3;color:var(--muted);margin-top:2px}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.pill{height:32px;display:inline-flex;align-items:center;gap:7px;padding:0 12px;border-radius:16px;background:var(--card);font-size:.84rem;font-weight:600}
+.pulse{position:relative;width:8px;height:8px;border-radius:50%;background:var(--mint);flex:none}
+.pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--mint);animation:ping 1.8s ease-out infinite}
+@keyframes ping{to{transform:scale(2.8);opacity:0}}
+.profile .row{justify-content:center;margin-top:20px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tiles .tile:last-child{grid-column:1/-1}
+@media (min-width:860px){.tiles{grid-template-columns:repeat(5,minmax(0,1fr))}.tiles .tile:last-child{grid-column:auto}}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;padding:16px;border-radius:22px;border:0;background:var(--card);cursor:pointer;font:inherit;color:inherit;transition:transform .3s var(--pop),background .2s}
+.tile:hover{transform:translateY(-3px);background:#202731}
+.tile .ic{width:40px;height:40px;border-radius:20px;display:grid;place-items:center}
+.tile .ic svg{width:21px;height:21px}
+.tile b{font-size:1rem;font-weight:700}
+.tile span{color:var(--muted);font-size:.85rem;line-height:1.35}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tl li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:0 14px;position:relative;padding-bottom:18px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:6px;top:16px;bottom:-2px;width:2px;background:var(--raised)}
+.tl li:last-child::before{display:none}
+.tl .dot{width:14px;height:14px;border-radius:7px;border:3px solid var(--mint);background:var(--card);margin-top:4px;position:relative;z-index:1}
+.tl li.now .dot{background:var(--mint)}
+.tl .when{font-size:.82rem;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.tl h3{font-size:1.05rem;font-weight:700;margin:2px 0 3px}
+.tl p{color:var(--soft);font-size:.95rem}
+
+/* projects */
+.proj dl{margin:10px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:.94rem}
+.proj dt{font-weight:600;color:var(--muted)}
+.proj dd{margin:0;color:var(--soft)}
+.proj video{width:100%;border-radius:16px;margin-top:14px;background:#000}
+
+/* languages */
+.lang-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lang-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:14px 0}
+.lang-list li+li{border-top:1px solid var(--raised)}
+.lang-list b{font-weight:700;font-size:1.05rem}
+.meter{grid-column:1/-1;height:8px;border-radius:4px;background:var(--raised);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:4px;background:var(--mint);transform-origin:left;animation:fill 1s var(--ease) .25s both}
+@keyframes fill{from{transform:scaleX(0)}}
+.note{padding:14px 16px;border-radius:18px;border:1.5px dashed var(--raised);color:var(--muted)}
+.big{display:flex;align-items:baseline;gap:10px;margin-top:14px;flex-wrap:wrap}
+.big b{font-size:2.2rem;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+
+/* career */
+.cv-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:640px){.cv-pair{grid-template-columns:minmax(0,1fr)}}
+.cv-card{display:flex;flex-direction:column;gap:12px}
+.sheet{padding:0;border:0;background:none;cursor:zoom-in;border-radius:14px;overflow:hidden}
+.sheet img{width:100%;transition:transform .5s var(--ease)}
+.sheet:hover img{transform:scale(1.03)}
+.cv-one{display:flex;flex-direction:column;gap:16px;max-width:620px;width:100%;margin-inline:auto}
+.cv-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:23px;background:var(--raised)}
+.seg::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:19px;background:var(--bg);transition:transform .45s var(--pop)}
+.seg:has([data-cvl="en"][aria-pressed="true"])::before{transform:translateX(100%)}
+.seg button{position:relative;z-index:1;border:0;background:none;min-height:38px;padding:0 16px;font:700 .9rem/1 var(--font);color:var(--muted);cursor:pointer;transition:color .3s}
+.seg button[aria-pressed="true"]{color:var(--ink)}
+.sheet{transition:opacity .22s ease,transform .22s ease}
+.sheet.flip{opacity:0;transform:translateY(8px) scale(.985)}
+dialog{width:min(860px,calc(100% - 24px));max-height:calc(100% - 24px);padding:0;border:0;border-radius:24px;background:var(--card);color:var(--ink);opacity:0;transform:scale(.96);transition:opacity .3s var(--ease),transform .4s var(--pop)}
+dialog.open{opacity:1;transform:none}
+dialog::backdrop{background:rgba(5,8,12,.75)}
+.dlg-bar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px 12px 20px;background:var(--card)}
+.icon-btn{width:44px;height:44px;border-radius:22px;border:0;background:var(--raised);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.icon-btn svg{width:18px;height:18px}
+.dlg-img{padding:0 14px 14px}
+.dlg-img img{border-radius:12px}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+footer{padding-block:20px 36px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--card);padding-top:20px}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+
+<script>
+(function(){var r=document.documentElement,l='';try{l=localStorage.getItem('ep-lang')||''}catch(e){}
+if(l!=='fr'&&l!=='en')l=(navigator.language||'fr').toLowerCase().indexOf('fr')===0?'fr':'en';
+r.setAttribute('data-lang',l);r.lang=l})();
+</script>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <span class="brand"><i aria-hidden="true">JC</i>Julian Cutaya</span>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-set-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" role="tab" id="t-welcome" data-tab="welcome" aria-controls="welcome"><span lang="fr">Accueil</span><span lang="en">Welcome</span></button>
+      <button type="button" role="tab" id="t-engineering" data-tab="engineering" aria-controls="engineering"><span lang="fr">Formation</span><span lang="en">Engineering</span></button>
+      <button type="button" role="tab" id="t-mobility" data-tab="mobility" aria-controls="mobility"><span lang="fr">Langues</span><span lang="en">Languages</span></button>
+      <button type="button" role="tab" id="t-civic" data-tab="civic" aria-controls="civic"><span lang="fr">Engagement</span><span lang="en">Engagement</span></button>
+      <button type="button" role="tab" id="t-sport" data-tab="sport" aria-controls="sport"><span lang="fr">Sport</span><span lang="en">Sport</span></button>
+      <button type="button" role="tab" id="t-career" data-tab="career" aria-controls="career"><span lang="fr">Carrière</span><span lang="en">Career</span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 1. Welcome -->
+<section class="panel" id="welcome" role="tabpanel" aria-labelledby="t-welcome">
+  <div class="profile">
+    <div class="ring"><img class="avatar" src="media/photo.jpg" alt="Julian Cutaya" width="640" height="640"></div>
+    <h1>Julian Cutaya</h1>
+    <p class="handle"><span lang="fr">Élève ingénieur · ENSEEIHT</span><span lang="en">Engineering student · ENSEEIHT</span></p>
+    <p class="bio" lang="fr">En 2e année, parcours Calcul haute performance et Big Data, après une double licence Maths–Info à Toulouse. Je m'intéresse à l'IA, à la vision par ordinateur et à l'apprentissage statistique.</p>
+    <p class="bio" lang="en">Second year, High-Performance Computing and Big Data track, after a double degree in Maths and Computer Science in Toulouse. I am interested in AI, computer vision and statistical learning.</p>
+    <div class="stats">
+      <div><b>2A</b><span lang="fr">HPC et Big Data</span><span lang="en">HPC and Big Data</span></div>
+      <div><b>940</b><span lang="fr">au TOEIC</span><span lang="en">TOEIC score</span></div>
+      <div><b lang="fr">Juin 2027</b><b lang="en">June 2027</b><span lang="fr">stage IA recherché</span><span lang="en">AI internship wanted</span></div>
+    </div>
+    <div class="pills">
+      <span class="pill"><span class="pulse" aria-hidden="true"></span><span lang="fr">Disponible 10 semaines à 3 mois</span><span lang="en">Available for 10 weeks to 3 months</span></span>
+      <span class="pill"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Toulouse</span>
+    </div>
+    <div class="row">
+      <button type="button" class="btn solid" data-go="career"><span lang="fr">Voir mon CV</span><span lang="en">See my CV</span></button>
+      <a class="btn" href="https://www.linkedin.com/in/julian-cutaya-4b66a73b3" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.2 7.3h2.7V16H4.2zM5.55 3a1.55 1.55 0 1 1 0 3.1 1.55 1.55 0 0 1 0-3.1zM8.6 7.3h2.6v1.2h.04c.36-.68 1.24-1.4 2.56-1.4 2.74 0 3.2 1.8 3.2 4.14V16h-2.7v-4.2c0-1-.02-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.22V16H8.6z"/></svg>LinkedIn</a>
+    </div>
+  </div>
+  <p class="label"><span lang="fr">Explorer</span><span lang="en">Explore</span></p>
+  <div class="tiles">
+    <button type="button" class="tile" data-go="engineering"><span class="ic" style="background:rgba(125,214,192,.13)"><svg viewBox="0 0 24 24" fill="none" stroke="#7dd6c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg></span><b lang="fr">Formation</b><b lang="en">Studies</b><span lang="fr">Parcours et projets</span><span lang="en">Path and projects</span></button>
+    <button type="button" class="tile" data-go="mobility"><span class="ic" style="background:rgba(90,157,224,.16)"><svg viewBox="0 0 24 24" fill="none" stroke="#8cbcf0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span><b lang="fr">Langues</b><b lang="en">Languages</b><span lang="fr">Anglais, espagnol, japonais</span><span lang="en">English, Spanish, Japanese</span></button>
+    <button type="button" class="tile" data-go="civic"><span class="ic" style="background:rgba(176,140,240,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#b08cf0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span><b>Engagement</b><span lang="fr">Cours particuliers de maths</span><span lang="en">Private maths tutoring</span></button>
+    <button type="button" class="tile" data-go="sport"><span class="ic" style="background:rgba(240,138,75,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#f08a4b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.5 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.6 2.3-4.6.1 1.7.9 2.8 2 3.1C11 9 10.6 6 12 3z"/></svg></span><b lang="fr">Sport et projets</b><b lang="en">Sport &amp; projects</b><span lang="fr">Badminton, musculation et l'app Gymbo</span><span lang="en">Badminton, strength training and the Gymbo app</span></button>
+    <button type="button" class="tile" data-go="career"><span class="ic" style="background:rgba(240,196,106,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#f0c46a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 12.5h18"/></svg></span><b lang="fr">Carrière</b><b lang="en">Career</b><span lang="fr">CV et stage recherché</span><span lang="en">CV and internship</span></button>
+  </div>
+</section>
+
+<!-- 2. Engineering course -->
+<section class="panel" id="engineering" role="tabpanel" aria-labelledby="t-engineering" hidden>
+  <div class="ph"><h1 lang="fr">Formation d'ingénieur</h1><h1 lang="en">Engineering course</h1>
+    <p lang="fr">Des mathématiques à l'ingénierie des données, et les projets qui ont marqué ce parcours.</p>
+    <p lang="en">From mathematics to data engineering, and the projects along the way.</p></div>
+  <div class="card">
+    <ol class="tl">
+      <li><span class="dot" aria-hidden="true"></span><div><span class="when">2023</span><h3 lang="fr">Baccalauréat, mention Très Bien</h3><h3 lang="en">Baccalauréat, highest honours</h3><p lang="fr">Lycée Pierre-Paul Riquet, Saint-Orens.</p><p lang="en">Lycée Pierre-Paul Riquet, Saint-Orens.</p></div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><span class="when">2023 – 2026</span><h3 lang="fr">Double licence Mathématiques et Informatique</h3><h3 lang="en">Double degree in Mathematics and Computer Science</h3><p lang="fr">Université de Toulouse, avec un travail de recherche à l'IRIT en dernière année.</p><p lang="en">Université de Toulouse, with a research project at the IRIT lab in the final year.</p></div></li>
+      <li class="now"><span class="dot" aria-hidden="true"></span><div><span class="when">2026 – 2028</span><h3>ENSEEIHT, Toulouse INP</h3><p lang="fr">Diplôme d'ingénieur, parcours Calcul haute performance et Big Data.</p><p lang="en">Engineering degree, High-Performance Computing and Big Data track.</p></div></li>
+    </ol>
+  </div>
+  <p class="label"><span lang="fr">Projets</span><span lang="en">Projects</span></p>
+  <div class="grid2">
+    <article class="card proj"><span class="tag violet"><span lang="fr">Recherche · IRIT</span><span lang="en">Research · IRIT</span></span>
+      <h3 style="margin-top:10px" lang="fr">Limites d'un clustering online de séries temporelles</h3><h3 style="margin-top:10px" lang="en">Limits of online time-series clustering</h3>
+      <p class="kicker">2025 – 2026</p>
+      <dl><dt lang="fr">Problème</dt><dt lang="en">Problem</dt><dd lang="fr">Regrouper des courbes qui arrivent en continu, sans tout garder en mémoire.</dd><dd lang="en">Grouping curves that arrive continuously, without storing them all.</dd>
+        <dt lang="fr">Rôle</dt><dt lang="en">Role</dt><dd lang="fr">En équipe de 4, encadrés par Emmanuelle Claeys.</dd><dd lang="en">Team of 4, supervised by Emmanuelle Claeys.</dd>
+        <dt lang="fr">Méthode</dt><dt lang="en">Method</dt><dd lang="fr">Générateur de données synthétiques et benchmark reproductible de StreamingDBAKMeans (DTW, DBA).</dd><dd lang="en">Synthetic data generator and reproducible benchmark of StreamingDBAKMeans (DTW, DBA).</dd>
+        <dt lang="fr">Résultat</dt><dt lang="en">Outcome</dt><dd lang="fr">Une carte des conditions où l'algorithme fonctionne ou échoue.</dd><dd lang="en">A map of the conditions where the algorithm works or fails.</dd>
+        <dt lang="fr">À retenir</dt><dt lang="en">Takeaway</dt><dd lang="fr">Un bon protocole de test compte autant que l'algorithme.</dd><dd lang="en">A good test protocol matters as much as the algorithm.</dd></dl></article>
+    <article class="card proj"><span class="tag"><span lang="fr">Vision · projet de licence</span><span lang="en">Vision · bachelor project</span></span>
+      <h3 style="margin-top:10px" lang="fr">Prédire un mouvement sportif sur vidéo</h3><h3 style="margin-top:10px" lang="en">Predicting athletic motion from video</h3>
+      <p class="kicker">2025 – 2026</p>
+      <dl><dt lang="fr">Problème</dt><dt lang="en">Problem</dt><dd lang="fr">Suivre un athlète qui fait des tractions et anticiper la suite du mouvement.</dd><dd lang="en">Tracking an athlete doing pull-ups and anticipating the next motion.</dd>
+        <dt lang="fr">Méthode</dt><dt lang="en">Method</dt><dd lang="fr">Squelette extrait avec MMPose, analyse cinématique, prédiction avec un LSTM.</dd><dd lang="en">Skeleton extracted with MMPose, kinematic analysis, prediction with an LSTM.</dd>
+        <dt lang="fr">Résultat</dt><dt lang="en">Outcome</dt><dd lang="fr">Le modèle suit bien la tendance, avec plus d'erreurs aux changements de direction.</dd><dd lang="en">The model follows the trend well, with larger errors at changes of direction.</dd>
+        <dt lang="fr">À retenir</dt><dt lang="en">Takeaway</dt><dd lang="fr">La qualité des données d'entrée limite tout le reste.</dd><dd lang="en">Input data quality bounds everything downstream.</dd></dl>
+      <video src="media/pose.mp4" poster="media/pose.jpg" muted loop playsinline autoplay width="640" height="346" aria-label="Pose estimation"></video></article>
+    <article class="card proj"><span class="tag blue">Machine learning</span>
+      <h3 style="margin-top:10px" lang="fr">Reconnaître une activité avec un smartphone</h3><h3 style="margin-top:10px" lang="en">Recognising activities with a smartphone</h3>
+      <p class="kicker"><span lang="fr">Projet de cours, en binôme</span><span lang="en">Course project, in pairs</span></p>
+      <dl><dt lang="fr">Problème</dt><dt lang="en">Problem</dt><dd lang="fr">Classer 6 activités à partir des capteurs de 30 personnes.</dd><dd lang="en">Classifying 6 activities from the sensors of 30 people.</dd>
+        <dt lang="fr">Méthode</dt><dt lang="en">Method</dt><dd lang="fr">Modèles classiques et réseau de neurones, testés sur des personnes jamais vues.</dd><dd lang="en">Classical models and a neural network, tested on unseen people.</dd>
+        <dt lang="fr">Résultat</dt><dt lang="en">Outcome</dt><dd lang="fr">Environ 96 % de précision, contre 89 % dans l'article de référence.</dd><dd lang="en">About 96% accuracy, against 89% in the reference paper.</dd>
+        <dt lang="fr">À retenir</dt><dt lang="en">Takeaway</dt><dd lang="fr">Tester sur des personnes jamais vues évite les scores trompeurs.</dd><dd lang="en">Testing on unseen people avoids misleading scores.</dd></dl></article>
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <article class="card proj"><span class="tag orange">Hackathon Enedis</span>
+        <h3 style="margin-top:10px" lang="fr">Données manquantes</h3><h3 style="margin-top:10px" lang="en">Missing data</h3>
+        <p class="kicker">2025</p>
+        <dl><dt lang="fr">Problème</dt><dt lang="en">Problem</dt><dd lang="fr">Compléter des courbes de consommation électrique incomplètes.</dd><dd lang="en">Filling gaps in electricity consumption curves.</dd>
+          <dt lang="fr">Méthode</dt><dt lang="en">Method</dt><dd lang="fr">Clustering des profils, puis interpolation et centroïdes.</dd><dd lang="en">Clustering of profiles, then interpolation and centroids.</dd>
+        <dt lang="fr">À retenir</dt><dt lang="en">Takeaway</dt><dd lang="fr">Comprendre les données avant de chercher un modèle.</dd><dd lang="en">Understand the data before picking a model.</dd></dl></article>
+      <article class="card proj"><span class="tag gold"><span lang="fr">Mathématiques</span><span lang="en">Mathematics</span></span>
+        <h3 style="margin-top:10px" lang="fr">Théorème des deux carrés de Fermat</h3><h3 style="margin-top:10px" lang="en">Fermat's two-squares theorem</h3>
+        <p class="kicker">2024 – 2025</p>
+        <p style="margin-top:8px" lang="fr">Mémoire de licence : démonstration complète, par l'arithmétique modulaire et l'étude des anneaux.</p><p style="margin-top:8px" lang="en">Bachelor's thesis: a full proof using modular arithmetic and ring theory.</p>
+        <dl><dt lang="fr">À retenir</dt><dt lang="en">Takeaway</dt><dd lang="fr">Rédiger une preuve complète demande une rigueur à chaque ligne.</dd><dd lang="en">Writing a complete proof takes rigour on every line.</dd></dl></article>
+    </div>
+  </div>
+  <p class="label"><span lang="fr">Compétences</span><span lang="en">Skills</span></p>
+  <ul class="chips"><li>Python</li><li>NumPy · pandas · scikit-learn</li><li>C · OpenMP</li><li>Java</li><li>OCaml</li><li>SQL</li><li>Flutter · Firebase</li><li>Linux · Git</li><li>LaTeX</li></ul>
+</section>
+
+<!-- 3. International mobility -->
+<section class="panel" id="mobility" role="tabpanel" aria-labelledby="t-mobility" hidden>
+  <div class="ph"><h1 lang="fr">Langues et international</h1><h1 lang="en">Languages &amp; international</h1>
+    <p lang="fr">Les langues que je pratique, à l'école et au quotidien.</p>
+    <p lang="en">The languages I speak, at school and beyond.</p></div>
+  <div class="card">
+    <ul class="lang-list">
+      <li><b><span lang="fr">Français</span><span lang="en">French</span></b><span class="muted"><span lang="fr">Langue maternelle</span><span lang="en">Native</span></span><span class="meter" aria-hidden="true"><i style="width:100%"></i></span></li>
+      <li><b><span lang="fr">Anglais</span><span lang="en">English</span></b><span class="tag gold">TOEIC 940 / 990</span><span class="meter" aria-hidden="true"><i style="width:94%"></i></span></li>
+      <li><b><span lang="fr">Espagnol</span><span lang="en">Spanish</span></b><span class="muted">B1</span><span class="meter" aria-hidden="true"><i style="width:50%"></i></span></li>
+      <li><b><span lang="fr">Japonais</span><span lang="en">Japanese</span></b><span class="muted"><span lang="fr">Débutant · LV2 à l'ENSEEIHT</span><span lang="en">Beginner · second foreign language at ENSEEIHT</span></span><span class="meter" aria-hidden="true"><i style="width:12%"></i></span></li>
+    </ul>
+  </div>
+  </section>
+
+<!-- 4. Sustainability & civic engagement -->
+<section class="panel" id="civic" role="tabpanel" aria-labelledby="t-civic" hidden>
+  <div class="ph"><h1 lang="fr">Développement durable et engagement</h1><h1 lang="en">Sustainability &amp; civic engagement</h1></div>
+  <article class="card">
+    <span class="tag"><span lang="fr">En indépendant · 2024-2025</span><span lang="en">Self-employed · 2024-2025</span></span>
+    <h3 style="margin-top:10px" lang="fr">Cours particuliers de mathématiques</h3><h3 style="margin-top:10px" lang="en">Private maths tutoring</h3>
+    <p lang="fr">J'ai accompagné deux lycéens (seconde et terminale) pendant plusieurs mois : reprise des notions, exercices, préparation des contrôles.</p>
+    <p lang="en">I tutored two high-school students for several months: reviewing concepts, exercises and test preparation.</p>
+    <div class="big"><b>9 → 15</b><span class="muted" lang="fr">sur 20, pour un élève de terminale : de sa moyenne de l'année à sa note au bac de maths</span><span class="muted" lang="en">out of 20, for one final-year student: from his year average to his baccalauréat maths grade</span></div>
+  </article>
+  <p class="note" lang="fr">D'autres engagements viendront compléter cette page pendant ma formation d'ingénieur.</p>
+  <p class="note" lang="en">More engagement will be added to this page during my engineering studies.</p>
+</section>
+
+<!-- 5. Sport & other activities -->
+<section class="panel" id="sport" role="tabpanel" aria-labelledby="t-sport" hidden>
+  <div class="ph"><h1 lang="fr">Sport et autres activités</h1><h1 lang="en">Sport &amp; other activities</h1></div>
+  <div class="card">
+    <span class="tag orange">Badminton</span>
+    <h3 style="margin:10px 0 16px" lang="fr">10 ans de pratique</h3><h3 style="margin:10px 0 16px" lang="en">10 years of play</h3>
+    <ol class="tl">
+      <li><span class="dot" aria-hidden="true"></span><div><span class="when"><span lang="fr">Avant 2025</span><span lang="en">Before 2025</span></span><p lang="fr">Associations sportives du collège, du lycée et de l'université.</p><p lang="en">School and university sports associations.</p></div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><span class="when">2025 – 2026</span><p lang="fr">En club, avec compétitions.</p><p lang="en">In a club, with competitions.</p></div></li>
+      <li class="now"><span class="dot" aria-hidden="true"></span><div><span class="when">2026 – 2027</span><p lang="fr">Association sportive de l'ENSEEIHT, compétitions universitaires.</p><p lang="en">ENSEEIHT sports association, university competitions.</p></div></li>
+    </ol>
+  </div>
+  <div class="grid2">
+    <article class="card"><span class="tag"><span lang="fr">Projet personnel · depuis 2025</span><span lang="en">Personal project · since 2025</span></span>
+      <h3 style="margin-top:10px">Gymbo</h3>
+      <p lang="fr">Pratiquant de musculation, je développe ma propre application mobile de suivi d'entraînement, en Flutter avec Firebase. Ce portfolio reprend d'ailleurs son style.</p>
+      <p lang="en">As a strength-training enthusiast, I am building my own workout tracking app, with Flutter and Firebase. This portfolio borrows its style.</p>
+      <a class="btn solid" id="gymbo-link" href="https://getgymbo.web.app" target="_blank" rel="noopener" style="margin-top:16px">getgymbo.web.app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></article>
+    <article class="card"><span class="tag gold"><span lang="fr">Depuis 2 ans</span><span lang="en">For 2 years</span></span>
+      <h3 style="margin-top:10px" lang="fr">Musculation</h3><h3 style="margin-top:10px" lang="en">Strength training</h3>
+      <p lang="fr">Je m'entraîne régulièrement en salle depuis deux ans.</p>
+      <p lang="en">I have been training regularly at the gym for two years.</p></article>
+  </div>
+</section>
+
+<!-- 6. Career development -->
+<section class="panel" id="career" role="tabpanel" aria-labelledby="t-career" hidden>
+  <div class="ph"><h1 lang="fr">Projet professionnel</h1><h1 lang="en">Career development</h1>
+    <p lang="fr">Ce que je recherche, mes CV en français et en anglais, et mon profil LinkedIn.</p>
+    <p lang="en">What I am looking for, my CVs in French and English, and my LinkedIn profile.</p></div>
+  <div class="card">
+    <span class="tag"><span class="pulse" aria-hidden="true"></span><span lang="fr">Objectif</span><span lang="en">Goal</span></span>
+    <h3 style="margin-top:10px" lang="fr">Stage de 2e année en IA ou data science</h3><h3 style="margin-top:10px" lang="en">Second-year internship in AI or data science</h3>
+    <p lang="fr">10 semaines à 3 mois, entre juin et mi-septembre 2027. À plus long terme, je souhaite me spécialiser en intelligence artificielle, notamment en vision par ordinateur et en apprentissage statistique.</p>
+    <p lang="en">10 weeks to 3 months, between June and mid-September 2027. In the longer term, I want to specialise in artificial intelligence, especially computer vision and statistical learning.</p>
+  </div>
+  <p class="label">CV</p>
+  <div class="card cv-one">
+    <div class="cv-head">
+      <div class="seg" role="group" aria-label="Langue du CV / CV language">
+        <button type="button" data-cvl="fr" aria-pressed="true">Français</button>
+        <button type="button" data-cvl="en" aria-pressed="false">English</button>
+      </div>
+      <div class="row"><button type="button" class="btn" id="cv-zoom"><span lang="fr">Agrandir</span><span lang="en">Enlarge</span></button><a class="btn solid js-dl" id="cv-pdf" href="cv/CV_Julian_Cutaya_FR.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</a></div>
+    </div>
+    <button type="button" class="sheet" id="cv-sheet" aria-label="Agrandir le CV / Enlarge CV"><img id="cv-img" src="cv/cv-fr.jpg" alt="CV en français" width="595" height="842"></button>
+  </div>
+    <div class="card contact">
+    <div><h3>LinkedIn</h3><p lang="fr">Mon profil professionnel, pour échanger ou me contacter.</p><p lang="en">My professional profile, to connect or get in touch.</p></div>
+    <a class="btn solid" href="https://www.linkedin.com/in/julian-cutaya-4b66a73b3" target="_blank" rel="noopener"><span lang="fr">Voir mon profil</span><span lang="en">View my profile</span></a>
+  </div>
+  <div class="card contact">
+    <div><h3>Contact</h3><p style="user-select:all">julian.cutaya@gmail.com</p></div>
+  </div>
+</section>
+
+<dialog id="cv-dlg" aria-label="CV">
+  <div class="dlg-bar"><strong>CV · Julian Cutaya</strong><button type="button" class="icon-btn" id="cv-x" aria-label="Fermer / Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dlg-img"><img id="cv-big" alt="CV" width="1323" height="1871"></div>
+</dialog>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Julian Cutaya</span><span>ENSEEIHT · Toulouse INP</span></div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function lang(){return root.getAttribute('data-lang')||'fr'}
+
+  var tabs=[].slice.call(document.querySelectorAll('[data-tab]')), ind=document.querySelector('.tabs .ind');
+  function moveInd(){var a=document.querySelector('[data-tab][aria-selected="true"]');if(!a)return;ind.style.left=a.offsetLeft+'px';ind.style.width=a.offsetWidth+'px'}
+  function show(id,push){
+    if(!document.getElementById(id))id='welcome';
+    tabs.forEach(function(t){var on=t.dataset.tab===id;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;document.getElementById(t.dataset.tab).hidden=!on;if(on&&t.parentNode.scrollWidth>t.parentNode.clientWidth)t.parentNode.scrollTo({left:t.offsetLeft-40,behavior:reduce?'auto':'smooth'})});
+    moveInd(); window.scrollTo({top:0,behavior:'auto'});
+    if(push){try{history.replaceState(null,'','#'+id)}catch(e){}}
+    document.querySelectorAll('video').forEach(function(v){var vis=!v.closest('[hidden]');if(vis&&!reduce){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()});
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t.dataset.tab,true)});
+    t.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){var n=tabs[(i+k+tabs.length)%tabs.length];n.focus();show(n.dataset.tab,true)}});
+  });
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go,true)})});
+  addEventListener('resize',moveInd);
+
+  function applyLang(l){root.setAttribute('data-lang',l);root.lang=l;store('ep-lang',l);document.querySelectorAll('[data-set-lang]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.setLang===l))});requestAnimationFrame(moveInd);if(window.setCvLang)window.setCvLang(l)}
+  document.querySelectorAll('[data-set-lang]').forEach(function(b){b.addEventListener('click',function(){
+    var l=b.dataset.setLang;if(l===lang())return;if(reduce){applyLang(l);return}
+    document.body.classList.add('switching');setTimeout(function(){applyLang(l);document.body.classList.remove('switching')},200);
+  })});
+  applyLang(lang());
+
+  var dlg=document.getElementById('cv-dlg'),big=document.getElementById('cv-big'),img=document.getElementById('cv-img'),pdf=document.getElementById('cv-pdf'),cvl=null,sheet=document.getElementById('cv-sheet');
+  function setCv(l){if(l===cvl)return;var first=cvl===null;cvl=l;
+    document.querySelectorAll('[data-cvl]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.cvl===l))});
+    pdf.href='cv/CV_Julian_Cutaya_'+l.toUpperCase()+'.pdf';
+    var swap=function(){img.src='cv/cv-'+l+'.jpg';img.alt=l==='fr'?'CV en français':'CV in English';sheet.classList.remove('flip')};
+    if(first||reduce){swap();return}
+    sheet.classList.add('flip');setTimeout(swap,220);
+  }
+  document.querySelectorAll('[data-cvl]').forEach(function(b){b.addEventListener('click',function(){setCv(b.dataset.cvl)})});
+  function openCv(){big.src='cv/cv-'+cvl+'-lg.jpg';big.alt=img.alt;
+    if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');requestAnimationFrame(function(){requestAnimationFrame(function(){dlg.classList.add('open')})})}
+  window.setCvLang=setCv;setCv(lang());
+  sheet.addEventListener('click',openCv);document.getElementById('cv-zoom').addEventListener('click',openCv);
+  document.getElementById('cv-x').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  dlg.addEventListener('close',function(){dlg.classList.remove('open')});
+
+  show((location.hash||'').slice(1),false);
+})();
+</script>
+
+</body>
+</html>
